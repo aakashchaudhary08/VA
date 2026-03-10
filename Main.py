@@ -2,7 +2,7 @@ import os
 import eel
 
 from Engine.Feature import *
-
+from Engine.command import *
 eel.init("Frontend")
 
 playAssistantSound()

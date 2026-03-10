@@ -40,10 +40,16 @@ $('.siri-message').textillate({
     });
 
     // mic button click event
-    $("#MicBtn").click(function () { 
-        eel.playAssistantSound();
-        $("#Oval").attr("hidden",true);
-        $("#SiriWave").attr("hidden",false);
-        
-    });
+    $("#MicBtn").click(async function () {
+
+    eel.playAssistantSound();
+
+    $("#Oval").attr("hidden", true);
+    $("#SiriWave").attr("hidden", false);
+
+    $(".siri-message li:first").text("Listening...");
+    
+    await eel.takeCommand()();
+
+});
 });
