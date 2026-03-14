@@ -49,7 +49,7 @@ $('.siri-message').textillate({
 
     $(".siri-message li:first").text("Listening...");
     
-    await eel.takeCommand()();
+    eel.allCommands()();
 
 });
 });

@@ -11,13 +11,15 @@ def speak(text):
     engine.setProperty('voice', voices[0].id)
     engine.setProperty('rate', 174)
 
-    print("Assistant:", text)
+    try:
+        eel.DisplayMessage(text)()
+    except:
+        pass
 
     engine.say(text)
     engine.runAndWait()
 
 
-@eel.expose
 def takeCommand():
 
     r = sr.Recognizer()
@@ -37,16 +39,35 @@ def takeCommand():
 
         eel.DisplayMessage(query)()
 
-        speak(query)
+        speak(query)   # 👈 THIS LINE MAKES IT SPEAK
 
         time.sleep(1)
 
-        eel.ShowHood()()
-
         return query.lower()
 
-    except:
+    except Exception:
         print("Sorry, I didn't understand")
         eel.DisplayMessage("Sorry, I didn't understand")()
+        time.sleep(2)
         eel.ShowHood()()
+        speak("Sorry, I didn't understand")
         return ""
+
+
+@eel.expose
+def allCommands():
+    query = takeCommand()
+    print(query)
+
+    if "open" in query:
+        from engine.feature import openCommand
+        openCommand(query)
+
+    elif "youtube" in query:
+        from engine.feature import PlayYoutube
+        PlayYoutube(query)
+
+    else:
+        print("not run")
+
+    eel.ShowHood()()  
